@@ -5,10 +5,10 @@ from collections import defaultdict
 from retry_requests import retry
 
 key_map = {
-	'temperature' : 'temperature_2m',
-	'windSpeed' : 'wind_speed_10m', 
-	'windDirection' : 'wind_direction_10m',
-	'humidity' : 'relative_humidity_2m'
+	'temperature_2m' : 'temperature',
+	'wind_speed_10m' : 'windSpeed', 
+	'wind_direction_10m' : 'windDirection',
+	'relative_humidity_2m' : 'humidity'
 }
 
 # Setup the Open-Meteo API client with cache and retry on error
@@ -70,9 +70,10 @@ def filter_data(data):
     filtered_data = {}
     for keys in key_map.keys():
         filtered_data[key_map[keys]] = data[keys]
+    return filtered_data
 
 def get_data():
     response = make_request()[:]['values']
     return filter_data(response)
 
-print(make_request())
+print(get_data())

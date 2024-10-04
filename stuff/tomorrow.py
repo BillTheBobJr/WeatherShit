@@ -1,4 +1,5 @@
 import requests, json
+from collections import defaultdict
 
 key_map = {
     'temperature' : 'temperature',
@@ -21,10 +22,16 @@ def make_request():
     return json.loads(response.text)['timelines']['hourly'][:12]
 
 def filter_data(data):
-    filtered_data = {}
-    for keys in key_map.keys():
-        filtered_data[key_map[keys]] = data[keys]
+    filtered_data = defaultdict(dict)
+    for i in range(12):
+        for key in key_map.keys():
+            filtered_data[f'{i + 1}'][key_map[key]] = data[i]['values'][key]
+
+    return filtered_data
 
 def get_data():
-    response = make_request()[:]['values']
+    response = make_request()
     return filter_data(response)
+
+
+print(get_data())

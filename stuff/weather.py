@@ -28,6 +28,7 @@ def filter_data(data):
     filtered_data = {}
     for keys in key_map.keys():
         filtered_data[key_map[keys]] = data[keys]
+    return filtered_data
 
 def get_data():
     response = make_request()[:]['values']
