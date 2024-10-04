@@ -67,13 +67,12 @@ def make_request():
 	# print(hourly_dataframe)
 
 def filter_data(data):
-    filtered_data = {}
-    for keys in key_map.keys():
-        filtered_data[key_map[keys]] = data[keys]
-    return filtered_data
+	filtered_data = defaultdict(dict)
+	for i in data.keys():
+		for key in key_map.keys():
+			filtered_data[f'{i}'][key_map[key]] = data[f'{i}'][key]
+	return filtered_data
 
 def get_data():
-    response = make_request()[:]['values']
+    response = make_request()
     return filter_data(response)
-
-print(get_data())
