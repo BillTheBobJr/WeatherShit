@@ -1,0 +1,86 @@
+{
+    "1": {
+        "temperature_2m": 11.592,
+        "relative_humidity_2m": 55.0,
+        "cloud_cover": 60.0,
+        "wind_speed_10m": 6.489992,
+        "wind_direction_10m": 183.17976
+    },
+    "2": {
+        "temperature_2m": 14.392,
+        "relative_humidity_2m": 48.0,
+        "cloud_cover": 73.0,
+        "wind_speed_10m": 6.1305785,
+        "wind_direction_10m": 220.23628
+    },
+    "3": {
+        "temperature_2m": 16.042,
+        "relative_humidity_2m": 30.0,
+        "cloud_cover": 83.0,
+        "wind_speed_10m": 14.081478,
+        "wind_direction_10m": 265.60138
+    },
+    "4": {
+        "temperature_2m": 16.991999,
+        "relative_humidity_2m": 27.0,
+        "cloud_cover": 97.0,
+        "wind_speed_10m": 12.429127,
+        "wind_direction_10m": 280.0079
+    },
+    "5": {
+        "temperature_2m": 17.741999,
+        "relative_humidity_2m": 33.0,
+        "cloud_cover": 100.0,
+        "wind_speed_10m": 11.165805,
+        "wind_direction_10m": 290.77234
+    },
+    "6": {
+        "temperature_2m": 18.692,
+        "relative_humidity_2m": 34.0,
+        "cloud_cover": 67.0,
+        "wind_speed_10m": 9.255571,
+        "wind_direction_10m": 283.49576
+    },
+    "7": {
+        "temperature_2m": 19.642,
+        "relative_humidity_2m": 31.0,
+        "cloud_cover": 65.0,
+        "wind_speed_10m": 14.372974,
+        "wind_direction_10m": 292.06796
+    },
+    "8": {
+        "temperature_2m": 20.092,
+        "relative_humidity_2m": 32.0,
+        "cloud_cover": 17.0,
+        "wind_speed_10m": 19.8,
+        "wind_direction_10m": 306.86996
+    },
+    "9": {
+        "temperature_2m": 19.692,
+        "relative_humidity_2m": 30.0,
+        "cloud_cover": 38.0,
+        "wind_speed_10m": 22.401142,
+        "wind_direction_10m": 315.0001
+    },
+    "10": {
+        "temperature_2m": 19.142,
+        "relative_humidity_2m": 31.0,
+        "cloud_cover": 41.0,
+        "wind_speed_10m": 20.620804,
+        "wind_direction_10m": 314.29276
+    },
+    "11": {
+        "temperature_2m": 18.342,
+        "relative_humidity_2m": 33.0,
+        "cloud_cover": 100.0,
+        "wind_speed_10m": 18.391737,
+        "wind_direction_10m": 310.23627
+    },
+    "12": {
+        "temperature_2m": 17.692,
+        "relative_humidity_2m": 36.0,
+        "cloud_cover": 95.0,
+        "wind_speed_10m": 11.592894,
+        "wind_direction_10m": 306.15826
+    }
+}
