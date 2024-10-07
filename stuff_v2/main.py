@@ -26,21 +26,35 @@ def update_forecast_values():
         tomorrow_dict[(time_start + timedelta(hours = i)).strftime('%d-%m-%y+%H_%M_%S_%f')][f'{i}'] = tomorrow_data[time_start.strftime('%d-%m-%y+%H_%M_%S_%f')]
         weather_dict[(time_start + timedelta(hours = i)).strftime('%d-%m-%y+%H_%M_%S_%f')][f'{i}'] = weather_data[time_start.strftime('%d-%m-%y+%H_%M_%S_%f')]
 
+def write_data(name, data):
+    f = open(name, 'w')
+    f.write(json.dumps(data))
+    f.close()
+
 def write_done_forecast_values():
     time_start = pd.Timestamp.now().ceil('60min').to_pydatetime() + timedelta(hours=2)
+
     for key in meteo_dict.keys():
         if datetime.datetime.strptime(key, '%d-%m-%y+%H_%M_%S_%f') < time_start:
-            data = meteo_dict.pop(key)
-            f = open(key + ".txt", 'w')
-            f.write(json.dumps(data))
-            f.close()
+            write_data("meteo_-_" + key + ".txt", meteo_dict.pop(key))
+
+    for key in tomorrow_dict.keys():
+        if datetime.datetime.strptime(key, '%d-%m-%y+%H_%M_%S_%f') < time_start:
+            write_data("tomorrow_-_" + key + ".txt", tomorrow_dict.pop(key))
+
+    for key in weather_dict.keys():
+        if datetime.datetime.strptime(key, '%d-%m-%y+%H_%M_%S_%f') < time_start:
+            write_data("weather_-_" + key + ".txt", weather_dict.pop(key))
 
 def dump_forecast_values():
     for key in meteo_dict.keys():
-        data = meteo_dict.pop(key)
-        f = open(key + ".txt", 'w')
-        f.write(json.dumps(data))
-        f.close()
+        write_data("meteo_-_" + key + ".txt", meteo_dict.pop(key))
+
+    for key in tomorrow_dict.keys():
+        write_data("tomorrow_-_" + key + ".txt", tomorrow_dict.pop(key))
+
+    for key in weather_dict.keys():
+        write_data("weather_-_" + key + ".txt", weather_dict.pop(key))
 
 
 # def get_forecast_values(forecast_dictionary):
