@@ -1,0 +1,1 @@
+{"2": {"temperature": 20.0, "humidity": 29, "windSpeed": 2, "windDirection": 270}, "1": {"temperature": 17.77777777777778, "humidity": 35, "windSpeed": 2, "windDirection": 247.5}, "0": {"temperature": 15.0, "humidity": 39, "windSpeed": 2, "windDirection": 247.5}}

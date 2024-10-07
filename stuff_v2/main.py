@@ -33,27 +33,34 @@ def write_data(name, data):
 
 def write_done_forecast_values():
     time_start = pd.Timestamp.now().ceil('60min').to_pydatetime() + timedelta(hours=2)
+    meteo_keys = list(meteo_dict.keys())
+    tomorrow_keys = list(tomorrow_dict.keys())
+    weather_keys = list(weather_dict.keys())
 
-    for key in meteo_dict.keys():
+    for key in meteo_keys:
         if datetime.datetime.strptime(key, '%d-%m-%y+%H_%M_%S_%f') < time_start:
             write_data("meteo_-_" + key + ".txt", meteo_dict.pop(key))
 
-    for key in tomorrow_dict.keys():
+    for key in tomorrow_keys:
         if datetime.datetime.strptime(key, '%d-%m-%y+%H_%M_%S_%f') < time_start:
             write_data("tomorrow_-_" + key + ".txt", tomorrow_dict.pop(key))
 
-    for key in weather_dict.keys():
+    for key in weather_keys:
         if datetime.datetime.strptime(key, '%d-%m-%y+%H_%M_%S_%f') < time_start:
             write_data("weather_-_" + key + ".txt", weather_dict.pop(key))
 
 def dump_forecast_values():
-    for key in meteo_dict.keys():
+    meteo_keys = list(meteo_dict.keys())
+    tomorrow_keys = list(tomorrow_dict.keys())
+    weather_keys = list(weather_dict.keys())
+
+    for key in meteo_keys:
         write_data("meteo_-_" + key + ".txt", meteo_dict.pop(key))
 
-    for key in tomorrow_dict.keys():
+    for key in tomorrow_keys:
         write_data("tomorrow_-_" + key + ".txt", tomorrow_dict.pop(key))
 
-    for key in weather_dict.keys():
+    for key in weather_keys:
         write_data("weather_-_" + key + ".txt", weather_dict.pop(key))
 
 
@@ -140,5 +147,8 @@ time.sleep(6*hour)
 
 # Stop the background thread
 stop_run_continuously.set()
+
+print("done")
+time.sleep(1*min)
 
 dump_forecast_values()

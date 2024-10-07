@@ -1,0 +1,1 @@
+{"1": {"temperature": 17.375999450683594, "windSpeed": 4.34346866607666, "windDirection": 304.5085754394531, "humidity": 28.0}, "0": {"temperature": 18.875999450683594, "windSpeed": 4.4403181076049805, "windDirection": 310.9142761230469, "humidity": 24.0}}
