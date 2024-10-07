@@ -120,9 +120,11 @@ min = 60
 hour = 60*min
 # Start the background thread
 stop_run_continuously = run_continuously(10*min)
-
+print("start")
 # Do some other things...
 time.sleep(6*hour)
 
 # Stop the background thread
 stop_run_continuously.set()
+
+dump_forecast_values()
