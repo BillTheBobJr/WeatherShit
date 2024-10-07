@@ -26,7 +26,7 @@ def update_forecast_values():
         tomorrow_dict[(time_start + timedelta(hours = i)).strftime('%d-%m-%y+%H_%M_%S_%f')][f'{i}'] = tomorrow_data[time_start.strftime('%d-%m-%y+%H_%M_%S_%f')]
         weather_dict[(time_start + timedelta(hours = i)).strftime('%d-%m-%y+%H_%M_%S_%f')][f'{i}'] = weather_data[time_start.strftime('%d-%m-%y+%H_%M_%S_%f')]
 
-def write_forecast_values():
+def write_done_forecast_values():
     time_start = pd.Timestamp.now().ceil('60min').to_pydatetime() + timedelta(hours=2)
     for key in meteo_dict.keys():
         if datetime.datetime.strptime(key, '%d-%m-%y+%H_%M_%S_%f') < time_start:
@@ -34,6 +34,13 @@ def write_forecast_values():
             f = open(key + ".txt", 'w')
             f.write(json.dumps(data))
             f.close()
+
+def dump_forecast_values():
+    for key in meteo_dict.keys():
+        data = meteo_dict.pop(key)
+        f = open(key + ".txt", 'w')
+        f.write(json.dumps(data))
+        f.close()
 
 
 # def get_forecast_values(forecast_dictionary):
@@ -69,10 +76,53 @@ def write_forecast_values():
 #     f.close()
 
 
-update_forecast_values()
-write_forecast_values()
-for key in meteo_dict.keys():
-    data = meteo_dict[key]
-    f = open(key + ".txt", 'w')
-    f.write(json.dumps(data))
-    f.close()
+# update_forecast_values()
+# write_forecast_values()
+# for key in meteo_dict.keys():
+#     data = meteo_dict[key]
+#     f = open(key + ".txt", 'w')
+#     f.write(json.dumps(data))
+#     f.close()
+
+
+def run_continuously(interval=1):
+    """Continuously run, while executing pending jobs at each
+    elapsed time interval.
+    @return cease_continuous_run: threading. Event which can
+    be set to cease continuous run. Please note that it is
+    *intended behavior that run_continuously() does not run
+    missed jobs*. For example, if you've registered a job that
+    should run every minute and you set a continuous run
+    interval of one hour then your job won't be run 60 times
+    at each interval but only once.
+    """
+    cease_continuous_run = threading.Event()
+
+    class ScheduleThread(threading.Thread):
+        @classmethod
+        def run(cls):
+            while not cease_continuous_run.is_set():
+                schedule.run_pending()
+                time.sleep(interval)
+
+    continuous_thread = ScheduleThread()
+    continuous_thread.start()
+    return cease_continuous_run
+
+
+def background_job():
+    print('Hello from the background thread')
+
+
+schedule.every().hour.do(update_forecast_values)
+
+min = 60
+hour = 60*min
+# Start the background thread
+stop_run_continuously = run_continuously(10*min)
+
+# Do some other things...
+time.sleep(6*hour)
+
+# Stop the background thread
+stop_run_continuously.set()
