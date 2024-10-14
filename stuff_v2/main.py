@@ -19,7 +19,7 @@ def update_forecast_values():
     meteo_data = open_meteo.get_data()
     tomorrow_data = tomorrow.get_data()
     weather_data = weather.get_data()
-    time_start = pd.Timestamp.now().ceil('60min').to_pydatetime() + timedelta(hours=2)
+    time_start = pd.Timestamp.now().ceil('60min').to_pydatetime()
 
     for i in range(12):
         meteo_dict[(time_start + timedelta(hours = i)).strftime('%d-%m-%y+%H_%M_%S_%f')][f'{i}'] = meteo_data[time_start.strftime('%d-%m-%y+%H_%M_%S_%f')]
