@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     parsed_time = re.search("^.*?_-_(\\d{2}-\\d{2}-\\d{2}\\+\\d{2}_\\d{2}_\\d{2}_\\d{6})\\.txt$", file_name)
 
-    time = datetime.datetime.strptime(parsed_time[1], '%d-%m-%y+%H_%M_%S_%f') + datetime.timedelta(hours=5)
+    time = datetime.datetime.strptime(parsed_time[1], '%d-%m-%y+%H_%M_%S_%f')
 
     actual_time = get_historical_data(time)
 
@@ -31,8 +31,8 @@ if __name__ == '__main__':
     actual_dict = defaultdict(list)
 
     for key in actual_time.keys():
-        for i in len(all_forecasts_dict.keys()):
-            actual_dict[key].apped(actual_time[key])
+        for i in range(len(all_forecasts_dict.keys())):
+            actual_dict[key].append(actual_time[key])
 
     for time_out in all_forecasts_dict.keys():
         forecast_time.append(int(time_out))

@@ -26,8 +26,9 @@ def make_historical_request(time):
 	"latitude": 42.0308,
 	"longitude": -93.6319,
 	"hourly": ["temperature_2m", "relative_humidity_2m", "wind_speed_10m", "wind_direction_10m"],
-	"wind_speed_unit": "mph",
-	"forecast_days": 2
+	"start_date": (time - timedelta(days=1)).strftime('20%y-%m-%d'),
+	"end_date": time.strftime('20%y-%m-%d'),
+	"wind_speed_unit": "mph"
 }
 	responses = openmeteo.weather_api(url, params=params)
 
@@ -67,14 +68,15 @@ def make_historical_request(time):
 	# hourly_dataframe = pd.DataFrame(data = hourly_data)
 	# print(hourly_dataframe)
 
-def filter_data(data):
+def filter_data(data, curr_time):
 	filtered_data = defaultdict(dict)
 	for i in data.keys():
 		time = (parser.parse(i) - timedelta(hours=5)).strftime('%d-%m-%y+%H_%M_%S_%f')
 		for key in key_map.keys():
 			filtered_data[time][key_map[key]] = data[f'{i}'][key].item()
-	return filtered_data
+			
+	return filtered_data[(curr_time - timedelta(hours = 5)).strftime('%d-%m-%y+%H_%M_%S_%f')]
 
 def get_historical_data(time):
-    response = make_historical_request(time)
-    return filter_data(response)
+	response = make_historical_request(time)
+	return filter_data(response, time)
